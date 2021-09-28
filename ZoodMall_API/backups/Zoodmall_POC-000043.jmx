@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="ZoodMall_API_Automation_Suite" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Account Section" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1594032055000</longProp>
+        <longProp name="ThreadGroup.end_time">1594032055000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="Suite Parameter" enabled="true">
+          <collectionProp name="UserParameters.names">
+            <stringProp name="1216985755">password</stringProp>
+            <stringProp name="1358458790">randommobileno</stringProp>
+            <stringProp name="300911179">marketplace</stringProp>
+            <stringProp name="-501783154">randommobilenoaddress</stringProp>
+          </collectionProp>
+          <collectionProp name="UserParameters.thread_values">
+            <collectionProp name="918318342">
+              <stringProp name="-1210798288">test@1234</stringProp>
+              <stringProp name="-1809659204">${__Random(1,10000000)}</stringProp>
+              <stringProp name="2725">UZ</stringProp>
+              <stringProp name="-819759428">${__Random(1,100000)}</stringProp>
+            </collectionProp>
+          </collectionProp>
+          <boolProp name="UserParameters.per_iteration">false</boolProp>
+        </UserParameters>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Member.Registration" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;email&quot;: &quot;${email}&quot;,&#xd;
+    &quot;mobile&quot;: &quot;+99${randommobileno}&quot;,&#xd;
+    &quot;password&quot;: &quot;${password}&quot;,&#xd;
+    &quot;countryCode&quot;: &quot;IN&quot;,&#xd;
+    &quot;sandbox&quot;: true,&#xd;
+    &quot;native_app&quot;: true,&#xd;
+    &quot;lang&quot;: &quot;en&quot;,&#xd;
+    &quot;ver&quot;: &quot;3.2.14-beta03-uat&quot;,&#xd;
+    &quot;deviceType&quot;: &quot;android&quot;,&#xd;
+    &quot;deviceVersion&quot;: &quot;9&quot;,&#xd;
+    &quot;deviceInfo&quot;: &quot;Xiaomi(Device:Redmi K20_OS:9)&quot;,&#xd;
+    &quot;marketCode&quot;: &quot;${marketplace}&quot;,&#xd;
+    &quot;OM_DEVICE_UUID&quot;: &quot;2b91374340c7ea72&quot;,&#xd;
+    &quot;api&quot;: &quot;member.registermember&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">staging-in-www.zoodmall.com</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/interface/h6.php</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Set Email ID" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">var randomEmail = &quot;apiuserj_${__Random(1,10000000)}@yopmail.com&quot;;
+vars.put(&quot;email&quot;, randomEmail);</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Get CutomerID" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">cutomerid</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.Data.customerId</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+            <stringProp name="Sample.scope">all</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Code Should be 200" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">1</intProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Validate Messgae is Success" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1149187101">SUCCESS</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Registration Done" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">String cutomeridvalue = vars.get(&quot;cutomerid&quot;);
+if(cutomeridvalue == null){
+	AssertionResult.setFailure(true)
+}
+else {
+	AssertionResult.setFailure(false)
+	}
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Assertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Member.Login" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;loginUserCode&quot;: &quot;${email}&quot;,&#xd;
+    &quot;password&quot;: &quot;${password}&quot;,&#xd;
+    &quot;countryCode&quot;: &quot;IN&quot;,&#xd;
+    &quot;sandbox&quot;: true,&#xd;
+    &quot;native_app&quot;: true,&#xd;
+    &quot;lang&quot;: &quot;en&quot;,&#xd;
+    &quot;ver&quot;: &quot;3.2.14-beta03-uat&quot;,&#xd;
+    &quot;deviceType&quot;: &quot;android&quot;,&#xd;
+    &quot;deviceVersion&quot;: &quot;9&quot;,&#xd;
+    &quot;deviceInfo&quot;: &quot;Xiaomi(Device:Redmi K20_OS:9)&quot;,&#xd;
+    &quot;marketCode&quot;: &quot;${marketplace}&quot;,&#xd;
+    &quot;OM_DEVICE_UUID&quot;: &quot;2b91374340c7ea72&quot;,&#xd;
+    &quot;api&quot;: &quot;member.login&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">staging-in-www.zoodmall.com</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/interface/h6.php</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Validate Status code is 200" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Validate Messgae is Success" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1149187101">SUCCESS</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Member.UpdateInfo" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;firstName&quot;: &quot;Mayur&quot;,&#xd;
+    &quot;lastName&quot;: &quot;Jain&quot;,&#xd;
+    &quot;sandbox&quot;: true,&#xd;
+    &quot;native_app&quot;: true,&#xd;
+    &quot;lang&quot;: &quot;en&quot;,&#xd;
+    &quot;ver&quot;: &quot;3.2.14-beta03-uat&quot;,&#xd;
+    &quot;deviceType&quot;: &quot;android&quot;,&#xd;
+    &quot;deviceVersion&quot;: &quot;9&quot;,&#xd;
+    &quot;deviceInfo&quot;: &quot;Xiaomi(Device:Redmi K20_OS:9)&quot;,&#xd;
+    &quot;marketCode&quot;: &quot;${marketplace}&quot;,&#xd;
+    &quot;OM_DEVICE_UUID&quot;: &quot;2b91374340c7ea72&quot;,&#xd;
+    &quot;customerId&quot;: &quot;${cutomerid}&quot;,&#xd;
+    &quot;api&quot;: &quot;member.updateinfo&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">staging-in-www.zoodmall.com</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/interface/h6.php</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Code Should be 200" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Validate Messgae is Success" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1149187101">SUCCESS</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Customer Update Done" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">String cutomeridvalue = vars.get(&quot;cutomerid&quot;);
+if(cutomeridvalue == null){
+	AssertionResult.setFailure(false)
+}
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Assertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Member.GetmemberByUID" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;mPlatform&quot;: 1,&#xd;
+    &quot;fcmCode&quot;: &quot;fNG__4sNeg8:APA91bHwzQr_FxVeNKehFDP53nckMR12ADoU5b3BSOK81ALoLFyxwqAYcce3vURJdT4tTvsnOoZ5cpIzEXBJDIjFo2LfHYxIE-UUA6K8igaMdNM8R6Lj3jeTAq8WYovgO9HswUqObZdm&quot;,&#xd;
+    &quot;sandbox&quot;: true,&#xd;
+    &quot;native_app&quot;: true,&#xd;
+    &quot;lang&quot;: &quot;en&quot;,&#xd;
+    &quot;ver&quot;: &quot;3.2.14-beta03-uat&quot;,&#xd;
+    &quot;deviceType&quot;: &quot;android&quot;,&#xd;
+    &quot;deviceVersion&quot;: &quot;9&quot;,&#xd;
+    &quot;deviceInfo&quot;: &quot;Xiaomi(Device:Redmi K20_OS:9)&quot;,&#xd;
+    &quot;marketCode&quot;: &quot;${marketplace}&quot;,&#xd;
+    &quot;OM_DEVICE_UUID&quot;: &quot;2b91374340c7ea72&quot;,&#xd;
+    &quot;customerId&quot;: &quot;${cutomerid}&quot;,&#xd;
+    &quot;api&quot;: &quot;member.getmemberbyuids&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">staging-in-www.zoodmall.com</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/interface/h6.php</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Code Should be 200" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Validate Messgae is Success" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1149187101">SUCCESS</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1290083462">Mayur Jain</stringProp>
+              <stringProp name="74120866">Mayur</stringProp>
+              <stringProp name="2301116">Jain</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Cutomer.AddAddress" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;addressId&quot;: &quot;&quot;,&#xd;
+    &quot;firstName&quot;: &quot;TestAPIFN&quot;,&#xd;
+    &quot;lastName&quot;: &quot;TestAPILN&quot;,&#xd;
+    &quot;telephone&quot;: &quot;+99${randommobilenoaddress}&quot;,&#xd;
+    &quot;primaryContact&quot;: &quot;665568982&quot;,&#xd;
+    &quot;landline&quot;: &quot;&quot;,&#xd;
+    &quot;email&quot;: &quot;${emailAddress}&quot;,&#xd;
+    &quot;state&quot;: &quot;Andijan Region&quot;,&#xd;
+    &quot;city&quot;: &quot;Andijan city&quot;,&#xd;
+    &quot;placeArea&quot;: &quot;&quot;,&#xd;
+    &quot;street1&quot;: &quot;Fox stress&quot;,&#xd;
+    &quot;buildingName&quot;: &quot;Olfanjo&quot;,&#xd;
+    &quot;floor&quot;: &quot;10th&quot;,&#xd;
+    &quot;country&quot;: &quot;${marketplace}&quot;,&#xd;
+    &quot;zipcode&quot;: &quot;258369&quot;,&#xd;
+    &quot;isDefault&quot;: 1,&#xd;
+    &quot;type&quot;: &quot;update&quot;,&#xd;
+    &quot;sandbox&quot;: true,&#xd;
+    &quot;native_app&quot;: true,&#xd;
+    &quot;lang&quot;: &quot;en&quot;,&#xd;
+    &quot;ver&quot;: &quot;3.2.14-beta03-uat&quot;,&#xd;
+    &quot;deviceType&quot;: &quot;android&quot;,&#xd;
+    &quot;deviceVersion&quot;: &quot;9&quot;,&#xd;
+    &quot;deviceInfo&quot;: &quot;Xiaomi(Device:Redmi K20_OS:9)&quot;,&#xd;
+    &quot;marketCode&quot;: &quot;${marketplace}&quot;,&#xd;
+    &quot;OM_DEVICE_UUID&quot;: &quot;2b91374340c7ea72&quot;,&#xd;
+    &quot;customerId&quot;: &quot;${cutomerid}&quot;,&#xd;
+    &quot;api&quot;: &quot;customer.myaddress&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">staging-in-www.zoodmall.com</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/interface/h6.php</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Set AddressEmail ID" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">var randomEmailAddress = &quot;apiadressadd_${__Random(1,10000)}@yopmail.com&quot;;
+vars.put(&quot;emailAddress&quot;, randomEmailAddress);</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Get AddressID" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">addressId</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.Data.id</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+            <stringProp name="Sample.scope">all</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Cutomer.UpdateAddress" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;addressId&quot;: &quot;${addressId}&quot;,&#xd;
+    &quot;firstName&quot;: &quot;TestAPIFN&quot;,&#xd;
+    &quot;lastName&quot;: &quot;TestAPILN&quot;,&#xd;
+    &quot;telephone&quot;: &quot;+99${randommobilenoaddress}&quot;,&#xd;
+    &quot;primaryContact&quot;: &quot;665568982&quot;,&#xd;
+    &quot;landline&quot;: &quot;&quot;,&#xd;
+    &quot;email&quot;: &quot;${emailAddress}&quot;,&#xd;
+    &quot;state&quot;: &quot;Andijan Region &quot;,&#xd;
+    &quot;city&quot;: &quot;Andijan city &quot;,&#xd;
+    &quot;placeArea&quot;: &quot;&quot;,&#xd;
+    &quot;street1&quot;: &quot;Fox stress&quot;,&#xd;
+    &quot;buildingName&quot;: &quot;CornerSouth Update from API&quot;,&#xd;
+    &quot;floor&quot;: &quot;15th Floor Update from API&quot;,&#xd;
+    &quot;country&quot;: &quot;${marketplace}&quot;,&#xd;
+    &quot;zipcode&quot;: &quot;258369&quot;,&#xd;
+    &quot;isDefault&quot;: 1,&#xd;
+    &quot;type&quot;: &quot;update&quot;,&#xd;
+    &quot;sandbox&quot;: true,&#xd;
+    &quot;native_app&quot;: true,&#xd;
+    &quot;lang&quot;: &quot;en&quot;,&#xd;
+    &quot;ver&quot;: &quot;3.2.14-beta03-uat&quot;,&#xd;
+    &quot;deviceType&quot;: &quot;android&quot;,&#xd;
+    &quot;deviceVersion&quot;: &quot;9&quot;,&#xd;
+    &quot;deviceInfo&quot;: &quot;Xiaomi(Device:Redmi K20_OS:9)&quot;,&#xd;
+    &quot;marketCode&quot;: &quot;UZ&quot;,&#xd;
+    &quot;OM_DEVICE_UUID&quot;: &quot;2b91374340c7ea72&quot;,&#xd;
+    &quot;customerId&quot;: &quot;${customerId}&quot;,&#xd;
+    &quot;api&quot;: &quot;customer.myaddress&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">staging-in-www.zoodmall.com</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/interface/h6.php</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ResultCollector guiclass="AssertionVisualizer" testclass="ResultCollector" testname="Assertion Results" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
